@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            margin: 0;
+            box-sizing: border-box;
+            padding: 0;
+        }
+        .screen{
+            height: 100vh;
+            background: linear-gradient(to bottom, red, orange, yellow, green, cyan, blue, purple);
+            display: flex;
+            justify-content: center;
+        }
+        .coms{
+            display: flex;
+            align-content: space-around;
+            justify-content: center;
+            flex-wrap: wrap;
+            height: 100vh;
+        }
+        p{
+            font-family: sans-serif;
+            font-weight: bold;
+            text-align: center;
+        }
+        .mail{
+            font-size: 1.2rem;
+        }
+        .bd{
+            font-size: 0.8em;
+        }
+        .comment{
+            background: white;
+            border: 1px solid red;
+            width: 100%;
+        }
+    </style>
+    <title>Comments</title>
+</head>
+<body>
+    <div class="screen">
+        <div class="coms"></div>
+    </div>
+    <script>
+        const coms = document.querySelector('.coms')
+        function addLetter(a, b){
+            coms.innerHTML += `<div class="comment"><p class="mail">${a}</p><p class="bd">${b}</p></div>`
+        }
+        fetch('https://jsonplaceholder.typicode.com/comments?_limit=10')
+            .then(response => response.json())
+            .then(value => {
+                for(let i of value){
+                    addLetter(i.email, i.body)
+                }
+            })
+    </script>
+</body>
+</html>
